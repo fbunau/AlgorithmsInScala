@@ -28,4 +28,9 @@ object ParseFunctions {
   type ParseFunction[TestInput] = Iterator[String] => Option[List[TestInput]]
 
   implicit val singleNumbers: ParseFunction[Int] = _.toList.map(_.trim).traverse(x => Option(Integer.parseInt(x)))
+
+  implicit val arrayOfNumbers: ParseFunction[Array[Int]] = _.toList.map(_.trim).map(_.split(" ")).map(
+    _.toList.map(x => Option(Integer.parseInt(x))).sequence
+  ).sequence.map(_.map(_.toArray))
+  
 }

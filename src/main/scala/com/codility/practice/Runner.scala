@@ -16,6 +16,7 @@ import cats.effect._
 import cats.syntax.functor._
 import com.codility.practice.parsing.Parse
 import com.codility.practice.parsing.ParseFunctions
+import com.codility.practice.solutions.OddOccurrencesInArray
 import com.codility.practice.util.DebugUtil
 import com.codility.practice.util.DebugUtil.{debug, error, info, log, logIO, logResult, toBinaryString}
 
@@ -29,27 +30,27 @@ object Runner extends IOApp {
 
   //////////////////////////////////////////////////////////////////
 
-  import com.codility.practice.solutions.BinaryGap
+  type Input = Array[Int]
+  import ParseFunctions.arrayOfNumbers
   import ParseFunctions.singleNumbers
-  import com.codility.practice.util.DebugUtil.toBinaryString
-
-  val solution: Int => Int = BinaryGap.solution
+  val solution: Input => Int = OddOccurrencesInArray.solution
 
   //////////////////////////////////////////////////////////////////
 
   def run(args: List[String]): IO[ExitCode] = {
 
     val p = for {
-      inputs <- Parse.readData[Int](InputFile)
+      inputs <- Parse.readData[Input](InputFile)
       outputs <- Parse.readData[Int](ExpectedFile)
       _ <- info(s"Found: [${inputs.size}] tests\n")
-      // TODO make this use traverse
+
       testRuns <- (inputs.zipWithIndex, outputs).zipped.map {
         case ((input, caseNb), output) =>
           for {
             _ <- info(s"Running #${caseNb + 1} ..")
-            _ <- debug(toBinaryString(input))
+
             result <- IO.pure(solution(input))
+            _ <- log(input.toList, "INPUT")
             _ <- logResult(result)
             testPass = (result === output)
             _ <- if (testPass) info("SUCCESS\n") else error("FAILED\n")
