@@ -1,4 +1,4 @@
-package com.codility.practice.solutions
+package com.codility.lessons
 
 object OddOccurrencesInArray {
 

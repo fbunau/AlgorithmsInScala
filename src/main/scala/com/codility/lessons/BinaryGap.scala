@@ -1,8 +1,8 @@
-package com.codility.practice.solutions
+package com.codility.lessons
 
 import scala.collection.JavaConverters._
 
-import com.codility.practice.util.SolutionUtil.binaryFoldRight
+import com.algopractice.util.SolutionUtil.binaryFoldRight
 
 object BinaryGap {
 

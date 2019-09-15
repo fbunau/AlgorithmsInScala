@@ -1,4 +1,4 @@
-package com.codility.practice.util
+package com.algopractice.util
 
 object SolutionUtil {
 
