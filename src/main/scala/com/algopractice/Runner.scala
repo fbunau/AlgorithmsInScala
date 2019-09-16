@@ -35,19 +35,22 @@ object Runner extends IOApp {
   private val InputFile = "src/main/resources/input.txt"
   private val ExpectedFile = "src/main/resources/expected.txt"
 
+  // TODO: Write random generator with huge bounds
+  // TODO: write time benchmarking
+
   //////////////////////////////////////////////////////////////////
   // Solution switch
 
   type Input = (Int, Vector[Int])
-  type Output = Int
+  type Output = Vector[Int]
 
   private val inputDatasetParser = SingleNumber_ArrayOfInt
-  private val outputDatasetParser = SingleNumber
+  private val outputDatasetParser = ArrayOfInt
 
-  private val solution: Input => Output = ((n: Int, a: Vector[Int]) => FrogRiverOne.solution(n, a.toArray)).tupled
+  private val solution: Input => Output = ((n: Int, a: Vector[Int]) => MaxCounters.solution(n, a.toArray)).tupled.andThen(_.toVector)
 
   //////////////////////////////////////////////////////////////////
-  private val specificTestRun: Option[Int] = None//7.some
+  private val specificTestRun: Option[Int] = 3.some
   //////////////////////////////////////////////////////////////////
 
 
