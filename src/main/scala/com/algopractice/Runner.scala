@@ -38,13 +38,15 @@ object Runner extends IOApp {
   //////////////////////////////////////////////////////////////////
   // Solution switch
 
-  type Input = (Int, Vector[Int])
-  type Output = Vector[Int]
+  type Input = (Int, Int, Int)
+  type Output = Int
 
-  private val inputDatasetParser: ParserInput => DatasetParser[Input :: HNil] = SingleNumber_ArrayOfInt
-  private val outputDatasetParser: ParserInput => DatasetParser[Output :: HNil] = ArrayOfInt
+  private val inputDatasetParser = IntTuple3
+  private val outputDatasetParser = SingleNumber
 
-  private val solution: Input => Output = ((k: Int, v: Vector[Int]) => CyclicRotation.solution(v.toArray, k)).tupled.andThen(_.toVector)
+  private val solution: Input => Output = (FrogJmp.solution _).tupled
+
+  implicit val showTupleInt3 = DebugUtil.tuple3Show[Int]
 
   //////////////////////////////////////////////////////////////////
   private val specificTestRun: Option[Int] = None//4.some
