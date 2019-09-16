@@ -38,13 +38,13 @@ object Runner extends IOApp {
   //////////////////////////////////////////////////////////////////
   // Solution switch
 
-  type Input = Vector[Int]
+  type Input = (Int, Vector[Int])
   type Output = Int
 
-  private val inputDatasetParser = ArrayOfInt
+  private val inputDatasetParser = SingleNumber_ArrayOfInt
   private val outputDatasetParser = SingleNumber
 
-  private val solution: Input => Output = (a: Vector[Int]) => PermCheck.solution(a.toArray)
+  private val solution: Input => Output = ((n: Int, a: Vector[Int]) => FrogRiverOne.solution(n, a.toArray)).tupled
 
   //////////////////////////////////////////////////////////////////
   private val specificTestRun: Option[Int] = None//7.some
