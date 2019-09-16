@@ -17,7 +17,7 @@ abstract class DatasetParser[L <: HList](val input: ParserInput) extends Parser 
 
   def intTuple3 = rule { number ~ skipOneOrMoreWS ~ number ~ skipOneOrMoreWS ~ number ~ skipZeroOrMoreWS ~> ((a: Int, b: Int, c: Int) => (a, b, c))  }
 
-  def number = rule { capture(digits) ~ skipZeroOrMoreWS ~> (_.toInt) }
+  def number = rule { capture(optional(atomic("-")) ~ digits) ~ skipZeroOrMoreWS ~> (_.toInt) }
 
   def digits = rule { oneOrMore(CharPredicate.Digit) }
 

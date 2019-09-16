@@ -44,10 +44,10 @@ object Runner extends IOApp {
   private val inputDatasetParser = ArrayOfInt
   private val outputDatasetParser = SingleNumber
 
-  private val solution: Input => Output = (a: Vector[Int]) => PermMissingElement.solution(a.toArray)
+  private val solution: Input => Output = (a: Vector[Int]) => TapeEquilibrium.solution(a.toArray)
 
   //////////////////////////////////////////////////////////////////
-  private val specificTestRun: Option[Int] = None//4.some
+  private val specificTestRun: Option[Int] = None//7.some
   //////////////////////////////////////////////////////////////////
 
 
@@ -69,8 +69,8 @@ object Runner extends IOApp {
           for {
             _ <- info(s"Running #${caseNb + 1} ..")
 
-            result <- IO.pure(solution(input))
             _ <- log(input, "INPUT")
+            result <- IO.pure(solution(input))
             _ <- logResult(result)
 
             testPass = (result === expected)
