@@ -44,7 +44,7 @@ object Runner extends IOApp {
   private val inputDatasetParser = ArrayOfInt
   private val outputDatasetParser = SingleNumber
 
-  private val solution: Input => Output = (a: Vector[Int]) => TapeEquilibrium.solution(a.toArray)
+  private val solution: Input => Output = (a: Vector[Int]) => PermCheck.solution(a.toArray)
 
   //////////////////////////////////////////////////////////////////
   private val specificTestRun: Option[Int] = None//7.some
