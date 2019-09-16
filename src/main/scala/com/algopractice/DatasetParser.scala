@@ -13,19 +13,15 @@ abstract class DatasetParser[L <: HList](val input: ParserInput) extends Parser 
 
   def emptyIntArray = rule { atomic("{") ~ skipZeroOrMoreWS ~ atomic("}") ~> (() => Vector.empty[Int]) }
 
-  def nonEmptyIntArray = rule { atomic("{") ~ skipZeroOrMoreWS ~ zeroOrMore(arrayNumber) ~ number ~ skipZeroOrMoreWS ~ atomic("}") ~> ((v: Seq[Int], h: Int) => ((v :+ h)).toVector) }
-
-  def arrayNumber = rule { number ~ arraySeparator ~ skipZeroOrMoreWS }
+  def nonEmptyIntArray = rule { atomic("{") ~ skipZeroOrMoreWS ~ zeroOrMore(number) ~ skipZeroOrMoreWS ~ atomic("}") ~> ((s: Seq[Int]) => s.toVector) }
 
   def intTuple3 = rule { number ~ skipOneOrMoreWS ~ number ~ skipOneOrMoreWS ~ number ~ skipZeroOrMoreWS ~> ((a: Int, b: Int, c: Int) => (a, b, c))  }
 
-  def number = rule { capture(digits) ~> (_.toInt) }
+  def number = rule { capture(digits) ~ skipZeroOrMoreWS ~> (_.toInt) }
 
   def digits = rule { oneOrMore(CharPredicate.Digit) }
 
   def newLine = rule ( quiet(atomic("\r\n") | atomic("\n")) )
-
-  def arraySeparator = rule { atomic(",") }
 
   val wsChar = CharPredicate(" \t\r\n")
 

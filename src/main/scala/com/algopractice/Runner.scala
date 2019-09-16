@@ -38,15 +38,13 @@ object Runner extends IOApp {
   //////////////////////////////////////////////////////////////////
   // Solution switch
 
-  type Input = (Int, Int, Int)
+  type Input = Vector[Int]
   type Output = Int
 
-  private val inputDatasetParser = IntTuple3
+  private val inputDatasetParser = ArrayOfInt
   private val outputDatasetParser = SingleNumber
 
-  private val solution: Input => Output = (FrogJmp.solution _).tupled
-
-  implicit val showTupleInt3 = DebugUtil.tuple3Show[Int]
+  private val solution: Input => Output = (a: Vector[Int]) => PermMissingElement.solution(a.toArray)
 
   //////////////////////////////////////////////////////////////////
   private val specificTestRun: Option[Int] = None//4.some
