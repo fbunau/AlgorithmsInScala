@@ -17,6 +17,8 @@ abstract class DatasetParser[L <: HList](val input: ParserInput) extends Parser 
 
   def arrayNumber = rule { number ~ arraySeparator ~ skipZeroOrMoreWS }
 
+  def intTuple3 = rule { atomic("(") ~ skipZeroOrMoreWS ~ number ~ skipOneOrMoreWS ~ number ~ skipOneOrMoreWS ~ number ~ skipZeroOrMoreWS ~ atomic(")") ~> ((a: Int, b: Int, c: Int) => (a, b, c))  }
+
   def number = rule { capture(digits) ~> (_.toInt) }
 
   def digits = rule { oneOrMore(CharPredicate.Digit) }
@@ -34,16 +36,16 @@ abstract class DatasetParser[L <: HList](val input: ParserInput) extends Parser 
 
 object DatasetParser {
 
-  val SingleNumber = new DatasetParser[List[Int] :: HNil](_: ParserInput) {
-    override def datasetFormat = rule { zeroOrMore(number) ~ EOI ~> ((s: Seq[Int]) => s.toList) }
+  val SingleNumber = new DatasetParser[Int :: HNil](_: ParserInput) {
+    override def datasetFormat = rule { number ~ EOI }
   }
 
-  val ArrayOfInt = new DatasetParser[List[Vector[Int]] :: HNil](_: ParserInput) {
-    override def datasetFormat = rule { zeroOrMore(intArray) ~ EOI ~> ((s: Seq[Vector[Int]]) => s.toList) }
+  val ArrayOfInt = new DatasetParser[Vector[Int] :: HNil](_: ParserInput) {
+    override def datasetFormat = rule { intArray ~ EOI }
   }
 
-  val SingleNumber_ArrayOfInt = new DatasetParser[List[(Int, Vector[Int])] :: HNil](_: ParserInput) {
-    override def datasetFormat = rule { zeroOrMore(singleNumberAndIntArray) ~ EOI ~> ((s: Seq[(Int, Vector[Int])]) => s.toList) }
+  val SingleNumber_ArrayOfInt = new DatasetParser[(Int, Vector[Int]) :: HNil](_: ParserInput) {
+    override def datasetFormat = rule { singleNumberAndIntArray ~ EOI }
   }
 
 }

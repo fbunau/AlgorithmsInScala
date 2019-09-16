@@ -17,28 +17,14 @@ import com.algopractice.DatasetParser
 class DatasetParserTest extends FreeSpec with TableDrivenPropertyChecks with Matchers {
 
   "Test Array parsing - single test" in {
-    forAll(singleArrayTestData) {
-      (input, expected) =>
-        verifyParse(input, List(expected))(DatasetParser.ArrayOfInt)
-    }
-  }
-
-  "Test Array parsing - multi test" in {
-    forAll(convertToMulti(singleArrayTestData)) {
+    forAll(ArrayTestData) {
       (input, expected) =>
         verifyParse(input, expected)(DatasetParser.ArrayOfInt)
     }
   }
 
   "Test Number + Array parsing - single test" in {
-    forAll(singleNumberAndArrayTestData) {
-      (input, expected) =>
-        verifyParse(input, List(expected))(DatasetParser.SingleNumber_ArrayOfInt)
-    }
-  }
-
-  "Test Number + Array parsing - multi test" in {
-    forAll(convertToMulti(singleNumberAndArrayTestData)) {
+    forAll(NumberAndArrayTestData) {
       (input, expected) =>
         verifyParse(input, expected)(DatasetParser.SingleNumber_ArrayOfInt)
     }
@@ -58,15 +44,5 @@ class DatasetParserTest extends FreeSpec with TableDrivenPropertyChecks with Mat
     }
   }
 
-  private def convertToMulti[A](t: TableFor2[String, A]) = Table(
-    ("input", "expected"),
-    foldTestEntries(t.toList)
-  )
-
-  private def foldTestEntries[A](entries: List[(String, A)]): (String, List[A]) = {
-    entries.foldLeft(("", List[A]())) {
-      case (acc, (s, v)) => (acc._1 + s, acc._2 :+ v)
-    }
-  }
 
 }

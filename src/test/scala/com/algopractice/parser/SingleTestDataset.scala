@@ -4,7 +4,7 @@ import org.scalatest.prop.TableDrivenPropertyChecks
 
 object SingleTestDataset extends TableDrivenPropertyChecks {
 
-  val singleArrayTestData = Table(
+  val ArrayTestData = Table(
     ("input", "expected"),
     ("{}", Vector.empty[Int]),
     (
@@ -28,7 +28,7 @@ object SingleTestDataset extends TableDrivenPropertyChecks {
         |}""".stripMargin, Vector(1, 2, 3))
   )
 
-  val singleNumberAndArrayTestData = Table(
+  val NumberAndArrayTestData = Table(
     ("input", "expected"),
     ("2{}", (2, Vector.empty[Int])),
     ("2 {}", (2, Vector.empty[Int])),

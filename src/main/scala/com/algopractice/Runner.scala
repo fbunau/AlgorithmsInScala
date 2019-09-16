@@ -17,7 +17,7 @@ import cats.instances.int._
 import cats.effect._
 import cats.syntax.functor._
 import cats.instances.string.catsStdShowForString
-import com.algopractice.DatasetParser.{ArrayOfInt, SingleNumber_ArrayOfInt}
+import com.algopractice.DatasetParser._
 import com.algopractice.util.DebugUtil
 import com.algopractice.util.DebugUtil.{error, info, log, logResult}
 import org.parboiled2.{ParseError, ParserInput}
@@ -30,10 +30,10 @@ import scala.util.{Failure, Success}
 
 object Runner extends IOApp {
 
-  import com.codility.lessons.CyclicRotation
+  import com.codility.lessons._
 
-  private val InputFile = "src\\main\\resources\\input.txt"
-  private val ExpectedFile = "src\\main\\resources\\expected.txt"
+  private val InputFile = "src/main/resources/input.txt"
+  private val ExpectedFile = "src/main/resources/expected.txt"
 
   //////////////////////////////////////////////////////////////////
   // Solution switch
@@ -41,8 +41,8 @@ object Runner extends IOApp {
   type Input = (Int, Vector[Int])
   type Output = Vector[Int]
 
-  private val inputDatasetParser: ParserInput => DatasetParser[List[Input] :: HNil] = SingleNumber_ArrayOfInt
-  private val outputDatasetParser: ParserInput => DatasetParser[List[Output] :: HNil] = ArrayOfInt
+  private val inputDatasetParser: ParserInput => DatasetParser[Input :: HNil] = SingleNumber_ArrayOfInt
+  private val outputDatasetParser: ParserInput => DatasetParser[Output :: HNil] = ArrayOfInt
 
   private val solution: Input => Output = ((k: Int, v: Vector[Int]) => CyclicRotation.solution(v.toArray, k)).tupled.andThen(_.toVector)
 
@@ -89,17 +89,18 @@ object Runner extends IOApp {
 
   }
 
-  private def readData[A](filePath: String)(buildParser: ParserInput => DatasetParser[List[A] :: HNil]): IO[List[A]] = {
+  private def readData[A](filePath: String)(buildParser: ParserInput => DatasetParser[A :: HNil]): IO[List[A]] = {
     val source = Source.fromFile(filePath)
-    val data = source.getLines.mkString("")
-    val parser = buildParser(data)
+    val data = source.getLines
+    data.map { s =>
+      val parser = buildParser(s)
 
-    parser.datasetFormat.run() match {
-      case Success(x) => IO(source.close) *> IO.pure(x)
-      case Failure(e: ParseError) => IO.raiseError[List[A]](new Exception(s"Failed to parse data from: $filePath. Parser error: ${parser.formatError(e)}"))
-      case Failure(e) => IO.raiseError[List[A]](new Exception(s"Failed to parse data from: $filePath. Parser error: $e"))
-    }
-
+      parser.datasetFormat.run() match {
+        case Success(x) => IO.pure(x)
+        case Failure(e: ParseError) => IO.raiseError[A](new Exception(s"Failed to parse data from: $filePath. Parser error: ${parser.formatError(e)}"))
+        case Failure(e) => IO.raiseError[A](new Exception(s"Failed to parse data from: $filePath. Parser error: $e"))
+      }
+    }.toList.sequence <* IO(source.close)
   }
 
 }
