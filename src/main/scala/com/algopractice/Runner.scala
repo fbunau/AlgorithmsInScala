@@ -50,7 +50,7 @@ object Runner extends IOApp {
   private val solution: Input => Output = ((n: Int, a: Vector[Int]) => MaxCounters.solution(n, a.toArray)).tupled.andThen(_.toVector)
 
   //////////////////////////////////////////////////////////////////
-  private val specificTestRun: Option[Int] = 3.some
+  private val specificTestRun: Option[Int] = None
   //////////////////////////////////////////////////////////////////
 
 

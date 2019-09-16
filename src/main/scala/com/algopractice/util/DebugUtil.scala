@@ -61,4 +61,14 @@ object DebugUtil {
     }
   }
 
+  // easier println
+
+  def ppa[A](a: Array[A]): Unit = {
+    println(a.toList.toString)
+  }
+
+  def pp(a: Any): Unit = {
+    println(a.toString)
+  }
+
 }
