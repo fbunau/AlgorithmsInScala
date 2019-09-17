@@ -40,13 +40,13 @@ object Runner extends IOApp {
 
   //////////////////////////////////////////////////////////////////
   // Solution switch
-  type Input = (Vector[Int], Vector[Int])
+  type Input = String
   type Output = Int
 
-  private val inputDatasetParser = ArrayOfInt_ArrayOfInt
+  private val inputDatasetParser = BracketString
   private val outputDatasetParser = SingleNumber
 
-  private val solution: Input => Output = ((v1: Vector[Int], v2: Vector[Int]) => Fish.solution(v1.toArray, v2.toArray)).tupled
+  private val solution: Input => Output = Nesting.solution
 
   //////////////////////////////////////////////////////////////////
   private val specificTestRun: Option[Int] = None
