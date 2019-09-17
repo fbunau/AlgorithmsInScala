@@ -9,7 +9,7 @@ package com.codility.lessons
 
   private val solution: Input => Output = (FrogJmp.solution _).tupled
 
-  implicit val showTupleInt3 = DebugUtil.tuple3Show[Int]
+  implicit val showTupleInt3 = DebugUtil.tuple3Show[Int, Int, Int]
  */
 object FrogJmp {
 

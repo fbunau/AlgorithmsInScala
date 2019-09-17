@@ -41,14 +41,15 @@ object Runner extends IOApp {
   //////////////////////////////////////////////////////////////////
   // Solution switch
 
-  type Input = Vector[Int]
-  type Output = Int
+  type Input = (String, Vector[Int], Vector[Int])
+  type Output = Vector[Int]
 
-  private val inputDatasetParser = ArrayOfInt
-  private val outputDatasetParser = SingleNumber
+  private val inputDatasetParser = AlphaString_ArrayOfInt_ArrayOfInt
+  private val outputDatasetParser = ArrayOfInt
 
-  private val solution: Input => Output = (v: Vector[Int]) => MissingInteger.solution(v.toArray)
+  private val solution: Input => Output = ((s: String, v1: Vector[Int], v2: Vector[Int]) => GenomicRangeQuery.solution(s, v1.toArray, v2.toArray)).tupled.andThen(_.toVector)
 
+  implicit val showTupleInt3 = DebugUtil.tuple3Show[String, Vector[Int], Vector[Int]]
 
   //////////////////////////////////////////////////////////////////
   private val specificTestRun: Option[Int] = None

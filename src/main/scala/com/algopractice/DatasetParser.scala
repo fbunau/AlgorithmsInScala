@@ -19,6 +19,8 @@ abstract class DatasetParser[L <: HList](val input: ParserInput) extends Parser 
 
   def number = rule { capture(optional(atomic("-")) ~ digits) ~ skipZeroOrMoreWS ~> (_.toInt) }
 
+  def alphaString = rule { capture(oneOrMore(CharPredicate.Alpha)) }
+
   def digits = rule { oneOrMore(CharPredicate.Digit) }
 
   def newLine = rule ( quiet(atomic("\r\n") | atomic("\n")) )
@@ -28,6 +30,7 @@ abstract class DatasetParser[L <: HList](val input: ParserInput) extends Parser 
   def skipOneOrMoreWS = rule { quiet(oneOrMore(wsChar)) }
 
   def skipZeroOrMoreWS = rule { quiet(zeroOrMore(wsChar)) }
+
 }
 
 object DatasetParser {
@@ -46,6 +49,10 @@ object DatasetParser {
 
   val IntTuple3 = new DatasetParser[(Int, Int, Int) :: HNil](_: ParserInput) {
     override def datasetFormat = rule { intTuple3 ~ EOI }
+  }
+
+  val AlphaString_ArrayOfInt_ArrayOfInt = new DatasetParser[(String,  Vector[Int],  Vector[Int]) :: HNil](_: ParserInput) {
+    override def datasetFormat =rule { alphaString ~ skipZeroOrMoreWS ~ intArray ~ skipZeroOrMoreWS ~ intArray ~ EOI ~> ((s: String, v1: Vector[Int], v2: Vector[Int]) => (s, v1, v2)) }
   }
 
 }

@@ -55,8 +55,8 @@ object DebugUtil {
 
   /// Show
 
-  def tuple3Show[A] = new Show[(A, A, A)] {
-    override def show(t: (A, A, A)): String = {
+  def tuple3Show[A, B, C] = new Show[(A, B, C)] {
+    override def show(t: (A, B, C)): String = {
       t.toString
     }
   }
