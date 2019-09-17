@@ -55,4 +55,8 @@ object DatasetParser {
     override def datasetFormat =rule { alphaString ~ skipZeroOrMoreWS ~ intArray ~ skipZeroOrMoreWS ~ intArray ~ EOI ~> ((s: String, v1: Vector[Int], v2: Vector[Int]) => (s, v1, v2)) }
   }
 
+  val BracketString = new DatasetParser[String :: HNil](_: ParserInput) {
+    override def datasetFormat = rule { capture(oneOrMore(CharPredicate("[]{}()"))) ~ EOI }
+  }
+
 }

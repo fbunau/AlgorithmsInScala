@@ -40,14 +40,13 @@ object Runner extends IOApp {
 
   //////////////////////////////////////////////////////////////////
   // Solution switch
+  type Input = String
+  type Output = Int
 
-  type Input = (String, Vector[Int], Vector[Int])
-  type Output = Vector[Int]
+  private val inputDatasetParser = BracketString
+  private val outputDatasetParser = SingleNumber
 
-  private val inputDatasetParser = AlphaString_ArrayOfInt_ArrayOfInt
-  private val outputDatasetParser = ArrayOfInt
-
-  private val solution: Input => Output = ((s: String, v1: Vector[Int], v2: Vector[Int]) => GenomicRangeQuery.solution(s, v1.toArray, v2.toArray)).tupled.andThen(_.toVector)
+  private val solution: Input => Output = Brackets.solution
 
   implicit val showTupleInt3 = DebugUtil.tuple3Show[String, Vector[Int], Vector[Int]]
 
