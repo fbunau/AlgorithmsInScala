@@ -51,6 +51,10 @@ object DatasetParser {
     override def datasetFormat = rule { intTuple3 ~ EOI }
   }
 
+  val ArrayOfInt_ArrayOfInt = new DatasetParser[(Vector[Int],  Vector[Int]) :: HNil](_: ParserInput) {
+    override def datasetFormat =rule { intArray ~ skipZeroOrMoreWS ~ intArray ~ EOI ~> ((v1: Vector[Int], v2: Vector[Int]) => (v1, v2)) }
+  }
+
   val AlphaString_ArrayOfInt_ArrayOfInt = new DatasetParser[(String,  Vector[Int],  Vector[Int]) :: HNil](_: ParserInput) {
     override def datasetFormat =rule { alphaString ~ skipZeroOrMoreWS ~ intArray ~ skipZeroOrMoreWS ~ intArray ~ EOI ~> ((s: String, v1: Vector[Int], v2: Vector[Int]) => (s, v1, v2)) }
   }

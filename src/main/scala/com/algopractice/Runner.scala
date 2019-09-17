@@ -40,15 +40,13 @@ object Runner extends IOApp {
 
   //////////////////////////////////////////////////////////////////
   // Solution switch
-  type Input = String
+  type Input = (Vector[Int], Vector[Int])
   type Output = Int
 
-  private val inputDatasetParser = BracketString
+  private val inputDatasetParser = ArrayOfInt_ArrayOfInt
   private val outputDatasetParser = SingleNumber
 
-  private val solution: Input => Output = Brackets.solution
-
-  implicit val showTupleInt3 = DebugUtil.tuple3Show[String, Vector[Int], Vector[Int]]
+  private val solution: Input => Output = ((v1: Vector[Int], v2: Vector[Int]) => Fish.solution(v1.toArray, v2.toArray)).tupled
 
   //////////////////////////////////////////////////////////////////
   private val specificTestRun: Option[Int] = None
