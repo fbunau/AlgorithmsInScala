@@ -11,6 +11,9 @@ object SingleTestDataset extends TableDrivenPropertyChecks {
     ("{1 2 3}", Vector(1, 2, 3)),
     ("{1  2 3 }", Vector(1, 2, 3)),
     ("{ 1    2  3 }", Vector(1, 2, 3)),
+    ("{-1 -2 -3}", Vector(-1, -2, -3)),
+    ("{-1  -2 -3 }", Vector(-1, -2, -3)),
+    ("{ -1    -2  -3 }", Vector(-1, -2, -3))
   )
 
   val NumberAndArrayTestData = Table(
@@ -21,6 +24,12 @@ object SingleTestDataset extends TableDrivenPropertyChecks {
     ("33 {1 2 3}", (33, Vector(1, 2, 3))),
     ("5{1 2 3 }", (5, Vector(1, 2, 3))),
     ("0 { 1    2  3 }", (0, Vector(1, 2, 3))),
+    ("-2{}", (-2, Vector.empty[Int])),
+    ("-2 {}", (-2, Vector.empty[Int])),
+    ("-11 { }", (-11, Vector.empty[Int])),
+    ("-33 {-1 -2 -3}", (-33, Vector(-1, -2, -3))),
+    ("-5{-1 -2 -3 }", (-5, Vector(-1, -2, -3))),
+    ("0 { -1    -2  -3 }", (0, Vector(-1, -2, -3)))
   )
 
 }

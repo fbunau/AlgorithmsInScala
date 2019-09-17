@@ -41,13 +41,14 @@ object Runner extends IOApp {
   //////////////////////////////////////////////////////////////////
   // Solution switch
 
-  type Input = (Int, Vector[Int])
-  type Output = Vector[Int]
+  type Input = Vector[Int]
+  type Output = Int
 
-  private val inputDatasetParser = SingleNumber_ArrayOfInt
-  private val outputDatasetParser = ArrayOfInt
+  private val inputDatasetParser = ArrayOfInt
+  private val outputDatasetParser = SingleNumber
 
-  private val solution: Input => Output = ((n: Int, a: Vector[Int]) => MaxCounters.solution(n, a.toArray)).tupled.andThen(_.toVector)
+  private val solution: Input => Output = (v: Vector[Int]) => MissingInteger.solution(v.toArray)
+
 
   //////////////////////////////////////////////////////////////////
   private val specificTestRun: Option[Int] = None

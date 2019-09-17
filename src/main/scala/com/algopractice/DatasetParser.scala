@@ -7,13 +7,13 @@ abstract class DatasetParser[L <: HList](val input: ParserInput) extends Parser 
 
   def datasetFormat: Rule[HNil, L]
 
-  def intArray = rule { emptyIntArray | nonEmptyIntArray }
+  def intArray = rule { nonEmptyIntArray | emptyIntArray }
 
   def singleNumberAndIntArray = rule { number ~ skipZeroOrMoreWS ~ intArray  ~> ((n: Int, s: Seq[Int]) => (n, s.toVector)) }
 
   def emptyIntArray = rule { atomic("{") ~ skipZeroOrMoreWS ~ atomic("}") ~> (() => Vector.empty[Int]) }
 
-  def nonEmptyIntArray = rule { atomic("{") ~ skipZeroOrMoreWS ~ zeroOrMore(number) ~ skipZeroOrMoreWS ~ atomic("}") ~> ((s: Seq[Int]) => s.toVector) }
+  def nonEmptyIntArray = rule { atomic("{") ~ skipZeroOrMoreWS ~ oneOrMore(number) ~ skipZeroOrMoreWS ~ atomic("}") ~> ((s: Seq[Int]) => s.toVector) }
 
   def intTuple3 = rule { number ~ skipOneOrMoreWS ~ number ~ skipOneOrMoreWS ~ number ~ skipZeroOrMoreWS ~> ((a: Int, b: Int, c: Int) => (a, b, c))  }
 
