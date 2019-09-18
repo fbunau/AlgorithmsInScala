@@ -71,8 +71,11 @@ My goal is to use as many algorithm problems using pure functions and functional
 
 Here are some of my 100% solutions. Only codility so far, but planning to do more.
 
+### 0. Data structures
+   - [Segment tree](src/main/scala/com/algopractice/data_structures/SegmentTree.scala)
 
-###1. Codility
+
+### 1. Codility
    - Iterations
       + [BinaryGap](src/main/scala/com/codility/lessons/_1_iterations/BinaryGap.scala)
    - Arrays
