@@ -18,8 +18,8 @@ object Generator {
   val MIN_K = 0
   val MAX_K = 100
 
-  val MIN_N = 1000000
-  val MAX_N = 1000000
+  val MIN_N = 100000
+  val MAX_N = 100000
 
   val MIN_A = -1000000
   val MAX_A = 1000000

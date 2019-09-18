@@ -20,7 +20,7 @@ import cats.instances.string.catsStdShowForString
 import com.algopractice.DatasetParser._
 import com.algopractice.util.DebugUtil
 import com.algopractice.util.DebugUtil.{error, info, log, logPerformance, logResult}
-import com.codility.lessons._9_maximum_slice.MaxDoubleSliceSim
+import com.codility.lessons._6_sorting._
 import org.parboiled2.{ParseError, ParserInput}
 import shapeless.{::, HNil}
 
@@ -46,7 +46,7 @@ object Runner extends IOApp {
   private val inputDatasetParser = ArrayOfInt
   private val outputDatasetParser = SingleNumber
 
-  private val solution: Input => Output = (v: Vector[Int]) => MaxDoubleSliceSim.solution(v.toArray)
+  private val solution: Input => Output = (v: Vector[Int]) => Distinct.solution(v.toArray)
 
   //////////////////////////////////////////////////////////////////
   private val specificTestRun: Option[Int] = None

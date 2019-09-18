@@ -97,7 +97,7 @@ Here are some of my 100% solutions. Only codility so far, but planning to do mor
       + CountDiv
    - Sorting
       + [MaxProductOfThree](src/main/scala/com/codility/lessons/_6_sorting/MaxProductOfThree.scala)
-      + Distinct
+      + [Distinct](src/main/scala/com/codility/lessons/_6_sorting/Distinct.scala)
       + Triangle
       + NumberOfDiscIntersections
    - Stacks and Queues
