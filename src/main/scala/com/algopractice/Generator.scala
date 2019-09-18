@@ -18,11 +18,11 @@ object Generator {
   val MIN_K = 0
   val MAX_K = 100
 
-  val MIN_N = 0
-  val MAX_N = 100
+  val MIN_N = 100000//3
+  val MAX_N = 100000
 
-  val MIN_A = 0
-  val MAX_A = 100
+  val MIN_A = -100000
+  val MAX_A = 100000
 
   def randomNumber: Gen[Int] = Gen.frequency(
     (5, Gen.choose(MIN_K, MIN_K)),
@@ -53,8 +53,8 @@ object Generator {
 
       val arrayStr = a.mkString(" ")
 
-      ri.write(n.toString)
-      ri.write(" ")
+//      ri.write(n.toString)
+//      ri.write(" ")
 
       ri.write("{ ")
       ri.write(arrayStr)
@@ -88,7 +88,7 @@ object Generator {
 //    }
 
     check(
-      Parameters.default.withMinSuccessfulTests(5),
+      Parameters.default.withMinSuccessfulTests(1),
       p
     )
 

@@ -32,22 +32,20 @@ object Runner extends IOApp {
 
   import com.codility.lessons._
 
-  private val InputFile = "src/main/resources/random_input.txt"
-  private val ExpectedFile = "src/main/resources/random_expected.txt"
-  //private val InputFile = "src/main/resources/input.txt"
-  //private val ExpectedFile = "src/main/resources/expected.txt"
-
-  // TODO: write time benchmarking
+//  private val InputFile = "src/main/resources/random_input.txt"
+//  private val ExpectedFile = "src/main/resources/random_expected.txt"
+  private val InputFile = "src/main/resources/input.txt"
+  private val ExpectedFile = "src/main/resources/expected.txt"
 
   //////////////////////////////////////////////////////////////////
   // Solution switch
-  type Input = String
+  type Input = Vector[Int]
   type Output = Int
 
-  private val inputDatasetParser = BracketString
+  private val inputDatasetParser = ArrayOfInt
   private val outputDatasetParser = SingleNumber
 
-  private val solution: Input => Output = Nesting.solution
+  private val solution: Input => Output = (v: Vector[Int]) => MaxProductOfThree.solution(v.toArray)
 
   //////////////////////////////////////////////////////////////////
   private val specificTestRun: Option[Int] = None
