@@ -2,7 +2,7 @@ package com.codility.lessons
 
 object MaxSliceSum {
 
-  val NegInf = -2000000
+  val NegInf: Int = -2000000
 
   def solution(a: Array[Int]): Int = {
     a.scanLeft(NegInf) {

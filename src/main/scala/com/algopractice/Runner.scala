@@ -45,7 +45,7 @@ object Runner extends IOApp {
   private val inputDatasetParser = ArrayOfInt
   private val outputDatasetParser = SingleNumber
 
-  private val solution: Input => Output = (v: Vector[Int]) => MaxSliceSum.solution(v.toArray)
+  private val solution: Input => Output = (v: Vector[Int]) => MaxDoubleSliceSim.solution(v.toArray)
 
   //////////////////////////////////////////////////////////////////
   private val specificTestRun: Option[Int] = None
