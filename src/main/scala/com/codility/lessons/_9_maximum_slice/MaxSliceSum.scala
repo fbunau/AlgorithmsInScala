@@ -1,4 +1,4 @@
-package com.codility.lessons
+package com.codility.lessons._9_maximum_slice
 
 object MaxSliceSum {
 

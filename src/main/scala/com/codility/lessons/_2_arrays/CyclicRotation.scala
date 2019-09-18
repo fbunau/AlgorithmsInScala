@@ -1,14 +1,5 @@
-package com.codility.lessons
+package com.codility.lessons._2_arrays
 
-/*
- type Input = (Int, Vector[Int])
- type Output = Vector[Int]
-
- private val inputDatasetParser = SingleNumber_ArrayOfInt
- private val outputDatasetParser = ArrayOfInt
-
- private val solution: Input => Output = ((k: Int, v: Vector[Int]) => CyclicRotation.solution(v.toArray, k)).tupled.andThen(_.toVector)
- */
 object CyclicRotation {
 
   def solution(a: Array[Int], k: Int): Array[Int] = {

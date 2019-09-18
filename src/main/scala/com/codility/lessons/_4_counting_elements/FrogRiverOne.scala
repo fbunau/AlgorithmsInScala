@@ -1,4 +1,4 @@
-package com.codility.lessons
+package com.codility.lessons._4_counting_elements
 
 import scala.collection.BitSet
 

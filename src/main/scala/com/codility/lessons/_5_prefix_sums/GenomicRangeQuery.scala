@@ -1,4 +1,4 @@
-package com.codility.lessons
+package com.codility.lessons._5_prefix_sums
 
 import com.algopractice.data_structures.SegmentTree
 

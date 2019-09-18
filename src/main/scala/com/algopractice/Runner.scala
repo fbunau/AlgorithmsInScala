@@ -19,7 +19,8 @@ import cats.syntax.functor._
 import cats.instances.string.catsStdShowForString
 import com.algopractice.DatasetParser._
 import com.algopractice.util.DebugUtil
-import com.algopractice.util.DebugUtil.{error, info, log, logResult, logPerformance}
+import com.algopractice.util.DebugUtil.{error, info, log, logPerformance, logResult}
+import com.codility.lessons._9_maximum_slice.MaxDoubleSliceSim
 import org.parboiled2.{ParseError, ParserInput}
 import shapeless.{::, HNil}
 

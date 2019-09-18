@@ -1,6 +1,4 @@
-package com.codility.lessons
-
-import scala.collection.JavaConverters._
+package com.codility.lessons._1_iterations
 
 import com.algopractice.util.SolutionUtil.binaryFoldRight
 

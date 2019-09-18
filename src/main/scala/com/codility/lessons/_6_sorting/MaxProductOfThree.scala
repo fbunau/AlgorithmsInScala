@@ -1,4 +1,4 @@
-package com.codility.lessons
+package com.codility.lessons._6_sorting
 
 object MaxProductOfThree {
 

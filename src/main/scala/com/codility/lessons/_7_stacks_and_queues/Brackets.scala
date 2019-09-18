@@ -1,5 +1,4 @@
-package com.codility.lessons
-
+package com.codility.lessons._7_stacks_and_queues
 
 object Brackets {
 

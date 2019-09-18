@@ -1,4 +1,4 @@
-package com.codility.lessons
+package com.codility.lessons._3_time_complexity
 
 object PermMissingElement {
 

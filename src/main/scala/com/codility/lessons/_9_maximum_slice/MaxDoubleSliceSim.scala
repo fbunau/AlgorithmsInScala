@@ -1,6 +1,4 @@
-package com.codility.lessons
-
-import com.algopractice.util.DebugUtil._
+package com.codility.lessons._9_maximum_slice
 
 object MaxDoubleSliceSim {
 
