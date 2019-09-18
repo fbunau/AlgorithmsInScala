@@ -3,7 +3,9 @@ package com.algopractice
 import java.io.{File, PrintWriter}
 
 import org.scalacheck.Gen
-import org.scalacheck.Prop.{forAll, collect}
+import org.scalacheck.Prop.{collect, forAll}
+import org.scalacheck.util.Pretty.Params
+import org.scalacheck.Test.{Parameters, check}
 
 
 object Generator {
@@ -11,6 +13,7 @@ object Generator {
   // A quick hack to generate some random data to check for bound issues
 
   private val RandomInputFile = "src/main/resources/random_input.txt"
+  private val RandomExpectedFile = "src/main/resources/random_expected.txt"
 
   val MIN_K = 0
   val MAX_K = 100
@@ -43,18 +46,26 @@ object Generator {
   } yield l
 
   def main(args: Array[String]): Unit = {
-    val pw = new PrintWriter(new File(RandomInputFile))
+    val ri = new PrintWriter(new File(RandomInputFile))
+    val re = new PrintWriter(new File(RandomExpectedFile))
 
     val p = forAll(randomNumber, randomSizedIntList) { (n, a) =>
 
       val arrayStr = a.mkString(" ")
 
-      pw.write(n.toString)
-      pw.write(" ")
+      ri.write(n.toString)
+      ri.write(" ")
 
-      pw.write("{ ")
-      pw.write(arrayStr)
-      pw.write(" }\n")
+      ri.write("{ ")
+      ri.write(arrayStr)
+      ri.write(" }\n")
+
+      ///
+
+      re.write(0.toString)
+      re.write("\n")
+
+      ///
 
       val stats = {
         if (a.length == MIN_N) "min"
@@ -65,9 +76,24 @@ object Generator {
       collect(stats)(true)
     }
 
-    p.check
+//    val p2 = forAll(Gen.listOfN(MAX_N, Gen.const('('))) { c =>
+//      ri.write(c.mkString(""))
+//      ri.write("\n")
+//
+//      //
+//
+//      re.write(0.toString)
+//      re.write("\n")
+//      true
+//    }
 
-    pw.close()
+    check(
+      Parameters.default.withMinSuccessfulTests(5),
+      p
+    )
+
+    ri.close()
+    re.close()
   }
 
 }

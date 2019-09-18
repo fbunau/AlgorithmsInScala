@@ -3,6 +3,7 @@
 # Edit at https://www.gitignore.io/?templates=sbt,scala,intellij
 
 **/random_input.txt
+**/random_expected.txt
 
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm

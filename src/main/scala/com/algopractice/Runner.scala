@@ -32,9 +32,10 @@ object Runner extends IOApp {
 
   import com.codility.lessons._
 
-  //private val InputFile = "src/main/resources/random_input.txt"
-  private val InputFile = "src/main/resources/input.txt"
-  private val ExpectedFile = "src/main/resources/expected.txt"
+  private val InputFile = "src/main/resources/random_input.txt"
+  private val ExpectedFile = "src/main/resources/random_expected.txt"
+  //private val InputFile = "src/main/resources/input.txt"
+  //private val ExpectedFile = "src/main/resources/expected.txt"
 
   // TODO: write time benchmarking
 
