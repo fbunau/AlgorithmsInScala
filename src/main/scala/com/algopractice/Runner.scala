@@ -19,7 +19,7 @@ import cats.syntax.functor._
 import cats.instances.string.catsStdShowForString
 import com.algopractice.DatasetParser._
 import com.algopractice.util.DebugUtil
-import com.algopractice.util.DebugUtil.{error, info, log, logResult}
+import com.algopractice.util.DebugUtil.{error, info, log, logResult, logPerformance}
 import org.parboiled2.{ParseError, ParserInput}
 import shapeless.{::, HNil}
 
@@ -72,10 +72,13 @@ object Runner extends IOApp {
             _ <- info(s"Running #${caseNb + 1} ..")
 
             _ <- log(input, "INPUT")
+            startTime <- IO { System.nanoTime() }
             result <- IO.pure(solution(input))
+            endTime <- IO { System.nanoTime() }
             _ <- logResult(result)
+            _ <- logPerformance(startTime, endTime)
 
-            testPass = (result === expected)
+            testPass = result === expected
             _ <- if (testPass) info("SUCCESS\n") else error("FAILED") *> info(show"Expected: $expected\n")
           } yield testPass
       }.sequence

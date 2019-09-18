@@ -25,6 +25,10 @@ object DebugUtil {
     _ <- IO { log(x, header) }
   } yield x
 
+  def logPerformance(startTime: Long, endTime: Long): IO[Unit] = {
+    log(s"${(endTime - startTime) / 1000000.0} ms", header = "TIME")
+  }
+
   def throwableStringStackTrace(t: Throwable): String = {
     import java.io.ByteArrayOutputStream
     import java.io.PrintStream
