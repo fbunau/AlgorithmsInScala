@@ -34,7 +34,7 @@ object SingleTestDataset extends TableDrivenPropertyChecks {
 
   val ComplexFormatTestData = Table(
     ("input", "expected"),
-    (("abc { 1 2 3 } {6 7 8}"), ("abc", Vector(1, 2, 3), Vector(3, 4, 5))),
+    (("abc { 1 2 3 } {6 7 8}"), ("abc", Vector(1, 2, 3), Vector(6, 7, 8))),
     (("efg{11 22 33} { 33  44    55}"), ("efg", Vector(11, 22, 33), Vector(33, 44, 55))),
   )
 

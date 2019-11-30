@@ -106,4 +106,10 @@ project/plugins/project/
 *.class
 *.log
 
+### Bloop ###
+.bloop/
+
+### Metals ###
+.metals/
+
 # End of https://www.gitignore.io/api/sbt,scala,intellij
