@@ -13,7 +13,7 @@ object FrogRiverOne {
       case (acc@Step(t, seen, last), (current, index)) =>
         if (t == 0) acc
         else
-          if (!seen.contains(current) && current <= x) Step(t - 1, seen + current, index)
+          if (!seen.contains(current) && current <= x) Step(t - 1, seen.union(Set(current)), index)
           else Step(t, seen, last)
     } match {
       case Step(0, _, last) => last

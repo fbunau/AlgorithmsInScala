@@ -2,20 +2,20 @@ package com.algopractice.parser
 
 import cats.instances.int._
 import cats.instances.vector._
-import cats.instances.list._
 import cats.instances.tuple._
 import cats.instances.string._
 import org.parboiled2.{ParseError, ParserInput}
-import org.scalatest.prop.{TableDrivenPropertyChecks, TableFor2}
-import org.scalatest.{FreeSpec, Matchers}
-import shapeless.{::, HList, HNil}
-import cats.{Eq, Show}
+import org.scalatest.prop.TableDrivenPropertyChecks
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.freespec.AnyFreeSpec
+import shapeless.{::, HNil}
+import cats.Eq
 
 import scala.util.{Failure, Success}
 import SingleTestDataset._
 import com.algopractice.DatasetParser
 
-class DatasetParserTest extends FreeSpec with TableDrivenPropertyChecks with Matchers {
+class DatasetParserTest extends AnyFreeSpec with TableDrivenPropertyChecks with Matchers {
 
   "Test Array parsing" in {
     forAll(ArrayTestData) {

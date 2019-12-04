@@ -2,7 +2,7 @@ package com.algopractice.util
 
 import cats.effect.IO
 import cats.syntax.show._
-import cats.{Eq, Show}
+import cats.Show
 import cats.instances.string.catsStdShowForString
 import com.algopractice.util.SolutionUtil.binaryFoldRight
 

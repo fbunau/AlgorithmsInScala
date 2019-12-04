@@ -1,8 +1,9 @@
 package com.algopractice.data_structures
 
-import org.scalatest.{FreeSpec, Matchers}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.freespec.AnyFreeSpec
 
-class SegmentTreeTest  extends FreeSpec with Matchers {
+class SegmentTreeTest  extends AnyFreeSpec with Matchers {
 
   "Test range minimum queries" in {
     val values = List(1, 2, 8, 4, 5, 1, 2, 9, 7, 7)

@@ -1,20 +1,13 @@
 package com.algopractice
 
-import cats.Show
 import cats.effect.{ExitCode, IO, IOApp}
 import cats.syntax.show._
-import cats.syntax.option._
-import cats.syntax.flatMap._
-import cats.syntax.applicative._
 import cats.syntax.apply._
 import cats.syntax.traverse._
 import cats.instances.list._
 import cats.instances.vector._
-import cats.instances.tuple._
-import cats.instances.option._
 import cats.syntax.eq._
 import cats.instances.int._
-import cats.effect._
 import cats.syntax.functor._
 import cats.instances.string.catsStdShowForString
 import com.algopractice.DatasetParser._
@@ -24,14 +17,10 @@ import com.codility.lessons._6_sorting._
 import org.parboiled2.{ParseError, ParserInput}
 import shapeless.{::, HNil}
 
-import scala.annotation.tailrec
 import scala.io.Source
-import scala.language.higherKinds
 import scala.util.{Failure, Success}
 
 object Runner extends IOApp {
-
-  import com.codility.lessons._
 
 //  private val InputFile = "src/main/resources/random_input.txt"
 //  private val ExpectedFile = "src/main/resources/random_expected.txt"
@@ -66,7 +55,7 @@ object Runner extends IOApp {
 
       _ <- info(s"Found: [${selectedInputs.size}] tests\n")
 
-      testRuns <- (selectedInputs.zipWithIndex, selectedExpected).zipped.map {
+      testRuns <- selectedInputs.zipWithIndex.lazyZip(selectedExpected).map {
         case ((input, caseNb), expected) =>
           for {
             _ <- info(s"Running #${caseNb + 1} ..")

@@ -4,7 +4,6 @@ import java.io.{File, PrintWriter}
 
 import org.scalacheck.Gen
 import org.scalacheck.Prop.{collect, forAll}
-import org.scalacheck.util.Pretty.Params
 import org.scalacheck.Test.{Parameters, check}
 
 
